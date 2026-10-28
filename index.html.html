@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Tendências de T&D (2026–2027)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0284c7',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        tealBrand: {
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                        },
+                        darkSlate: '#0f172a',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 360px;
+            }
+        }
+        .chart-container-wide {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 340px;
+            max-height: 420px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased leading-relaxed">
+
+    <!-- Sticky Navigation Bar -->
+    <nav class="sticky top-0 z-50 bg-darkSlate text-white shadow-lg border-b border-slate-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-3">
+                    <span class="text-2xl font-black text-sky-400">T&D</span>
+                    <span class="text-xs uppercase tracking-widest text-slate-300 border-l border-slate-600 pl-3 hidden md:inline">Tendências 2026–2027</span>
+                </div>
+                <div class="hidden lg:flex space-x-6 text-sm font-medium text-slate-300">
+                    <a href="#panorama" class="hover:text-sky-400 transition-colors">Panorama Global</a>
+                    <a href="#ia" class="hover:text-sky-400 transition-colors">Inteligência Artificial</a>
+                    <a href="#brasil" class="hover:text-sky-400 transition-colors">Cenário Brasil</a>
+                    <a href="#singapura" class="hover:text-sky-400 transition-colors">Ecossistemas</a>
+                    <a href="#vr" class="hover:text-sky-400 transition-colors">Imersão & VR</a>
+                    <a href="#resumo" class="hover:text-sky-400 transition-colors">Resumo & Matriz</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header / Hero Section -->
+    <header class="bg-gradient-to-r from-slate-900 via-sky-950 to-slate-900 text-white py-16 px-4 sm:px-6 lg:px-8 border-b border-sky-800">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="inline-block bg-sky-500/20 text-sky-300 border border-sky-400/30 rounded-full px-4 py-1 text-xs font-semibold uppercase tracking-wider mb-4">
+                Relatório Estratégico Especial
+            </div>
+            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4 text-white">
+                A Era da Velocidade de Talentos & IA Integrada
+            </h1>
+            <p class="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto font-light">
+                Mapeamento das transformações estruturais, métricas de impacto e modelos inovadores que estão redefinindo a educação corporativa no Brasil e no mundo para 2026 e 2027.
+            </p>
+
+            <!-- Hero KPI Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
+                <div class="bg-slate-800/80 border border-slate-700 rounded-xl p-5 shadow-lg backdrop-blur">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-sky-400">US$ 370B</div>
+                    <div class="text-xs sm:text-sm text-slate-300 mt-1">Investimento Anual Global em T&D</div>
+                </div>
+                <div class="bg-slate-800/80 border border-slate-700 rounded-xl p-5 shadow-lg backdrop-blur">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-teal-400">14%</div>
+                    <div class="text-xs sm:text-sm text-slate-300 mt-1">Empresas Líderes em <i>Talent Velocity</i></div>
+                </div>
+                <div class="bg-slate-800/80 border border-slate-700 rounded-xl p-5 shadow-lg backdrop-blur">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-sky-400">4 a 5 Anos</div>
+                    <div class="text-xs sm:text-sm text-slate-300 mt-1">Meia-vida das Habilidades Profissionais</div>
+                </div>
+                <div class="bg-slate-800/80 border border-slate-700 rounded-xl p-5 shadow-lg backdrop-blur">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-teal-400">94%</div>
+                    <div class="text-xs sm:text-sm text-slate-300 mt-1">Retenção de Talentos por Investimento T&D</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+        <!-- SECTION 1: Panorama Global & Talent Velocity -->
+        <section id="panorama" class="scroll-mt-20">
+            <div class="border-l-4 border-sky-600 pl-4 mb-8">
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">1. Panorama Global: A Metamorfose da Velocidade de Talentos</h2>
+                <p class="text-slate-600 mt-1">A emergência do conceito de <i>Talent Velocity</i> e o avanço das Organizações Baseadas em Habilidades.</p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-md p-6 sm:p-8 border border-slate-200 mb-8">
+                <p class="text-slate-700 leading-relaxed mb-6">
+                    A aceleração tecnológica encolheu a meia-vida das competências profissionais para menos de 5 anos, projetando que até <strong>50% das competências essenciais</strong> sofram transformações estruturais até 2027. Neste ambiente de rápida obsolescência, o aprendizado contínuo deixou de ser um benefício para se tornar a métrica central de sobrevivência empresarial.
+                </p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <!-- Left: Talent Velocity Donut -->
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 flex flex-col items-center">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-2 text-center">Maturidade Global em Talent Velocity</h3>
+                        <p class="text-xs text-slate-500 mb-4 text-center">Capacidade de mapear, requalificar e mobilizar talentos em tempo real.</p>
+                        <div class="chart-container">
+                            <canvas id="chartTalentVelocity"></canvas>
+                        </div>
+                        <p class="text-xs text-slate-600 mt-4 text-center italic">
+                            86% das empresas enfrentam lentidão nos ciclos formais, gerando gargalos operacionais e perda de competitividade.
+                        </p>
+                    </div>
+
+                    <!-- Right: Skills-Based Organization Impact -->
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-2 text-center">Impacto da Organização Baseada em Habilidades</h3>
+                        <p class="text-xs text-slate-500 mb-4 text-center">Ganhos em performance e retenção ao abandonar cargos rígidos.</p>
+                        <div class="chart-container">
+                            <canvas id="chartSkillsImpact"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: Inteligência Artificial em T&D -->
+        <section id="ia" class="scroll-mt-20">
+            <div class="border-l-4 border-teal-600 pl-4 mb-8">
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">2. A Explosão da IA em T&D: De Conteúdo a Agentes Autônomos</h2>
+                <p class="text-slate-600 mt-1">A fusão de tutoria hiperpersonalizada, produtividade acelerada e a experiência da Bosch AI Academy.</p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-md p-6 sm:p-8 border border-slate-200">
+                <p class="text-slate-700 leading-relaxed mb-6">
+                    A adoção de Inteligência Artificial em T&D transicionou de uma fase de prototipagem para a infraestrutura operacional definitiva. Mais de <strong>50% das grandes corporações globais</strong> já utilizam IA em suas plataformas de aprendizagem, direcionando prioridade orçamentária máxima para tutores inteligentes e geração automatizada de conteúdo.
+                </p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <!-- Left Chart: AI Gains -->
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-2 text-center">Ganho de Eficiência e Retenção com IA</h3>
+                        <p class="text-xs text-slate-500 mb-4 text-center">Comparativo de desempenho entre métodos tradicionais e habilitados por IA.</p>
+                        <div class="chart-container">
+                            <canvas id="chartAIGains"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Right Block: Bosch Case Study -->
+                    <div class="bg-gradient-to-br from-slate-900 to-sky-950 text-white p-6 rounded-xl shadow-md flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="bg-teal-500 text-slate-900 font-bold text-xs uppercase px-3 py-1 rounded-full">Estudo de Caso Global</span>
+                                <span class="text-xs text-slate-400">Alemanha</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-sky-300 mb-2">Bosch AI Academy & Ask Bosch</h3>
+                            <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                                A Bosch capacitou mais de <strong>100.000 colaboradores</strong> em habilidades de IA e dados, formando quase 5.000 especialistas dedicados em programas intensivos de 18 meses.
+                            </p>
+                            <ul class="space-y-2 text-xs sm:text-sm text-slate-300">
+                                <li class="flex items-start">
+                                    <span class="text-teal-400 font-bold mr-2">✔</span>
+                                    <span><strong>Retorno de 10x ROI em 5 anos:</strong> Projetos desenvolvidos pelos formados cobrem dez vezes o custo do treinamento.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-teal-400 font-bold mr-2">✔</span>
+                                    <span><strong>Plataforma Ask Bosch:</strong> Agentes de IA democratizaram a otimização preditiva para profissionais sem bagagem em TI.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+                            <span>Foco: Automação e Reskilling Interno</span>
+                            <span class="text-sky-400 font-semibold">100k+ Capacitados</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: Cenário Brasil & Desafio da Mensuração -->
+        <section id="brasil" class="scroll-mt-20">
+            <div class="border-l-4 border-sky-600 pl-4 mb-8">
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">3. O Cenário Brasileiro de T&D: Eficiência vs. Mensuração</h2>
+                <p class="text-slate-600 mt-1">Carga horária ascendente, equipes enxutas e o desafio crítico do cálculo de ROI.</p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-md p-6 sm:p-8 border border-slate-200">
+                <p class="text-slate-700 leading-relaxed mb-6">
+                    Os dados da ABTD mostram que as corporações brasileiras estão "treinando mais com os mesmos recursos". A carga horária subiu para <strong>26 horas/ano por colaborador</strong> com investimento estável de 1,70% da folha (R$ 1.199/colaborador). Para absorver o volume, a adoção de IA na criação de conteúdo saltou de 8% em 2024 para 69%. Contudo, a mensuração permanece o principal calcanhar de Aquiles.
+                </p>
+
+                <!-- Data Highlight Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                    <div class="bg-sky-50 border border-sky-200 rounded-xl p-4 text-center">
+                        <div class="text-xs uppercase font-bold text-sky-800 mb-1">Carga Horária Média</div>
+                        <div class="text-3xl font-black text-sky-600">26 Horas/Ano</div>
+                        <div class="text-xs text-slate-500 mt-1">Alta em relação às 21h históricas</div>
+                    </div>
+                    <div class="bg-teal-50 border border-teal-200 rounded-xl p-4 text-center">
+                        <div class="text-xs uppercase font-bold text-teal-800 mb-1">Ratio Equipe T&D</div>
+                        <div class="text-3xl font-black text-teal-600">1 : 648</div>
+                        <div class="text-xs text-slate-500 mt-1">Colaboradores por profissional de T&D</div>
+                    </div>
+                    <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-center">
+                        <div class="text-xs uppercase font-bold text-indigo-800 mb-1">Uso de IA para Conteúdo</div>
+                        <div class="text-3xl font-black text-indigo-600">69%</div>
+                        <div class="text-xs text-slate-500 mt-1">Empresas brasileiras adeptas</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <!-- Kirkpatrick / Measurement Gap Chart -->
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-2 text-center">Gargalo da Avaliação de Impacto (Brasil)</h3>
+                        <p class="text-xs text-slate-500 mb-4 text-center">% de empresas que avaliam cada etapa de eficácia educacional.</p>
+                        <div class="chart-container">
+                            <canvas id="chartBrazilEvaluation"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Brazil Urgent Challenge Callout -->
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 space-y-4">
+                        <h3 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2">O Desafio Nacional de Requalificação</h3>
+                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                            Projeções do SENAI/CNI indicam que o Brasil precisa qualificar e requalificar entre <strong>11,8 milhões e 14 milhões de trabalhadores</strong> em habilidades digitais e industriais até 2027 para mitigar o risco de um apagão de talentos.
+                        </p>
+                        <div class="bg-white p-4 rounded-lg border-l-4 border-amber-500 shadow-sm space-y-2">
+                            <span class="text-xs font-bold text-amber-800 uppercase">Iniciativas de Destaque no Setor Privado</span>
+                            <p class="text-xs text-slate-600">
+                                Grandes grupos brasileiros (ex: Banco Itaú, Ambev, Natura, BB) lideram programas de "realfabetização em IA", concedendo bolsas em programação e capacitando lideranças executivas para decisões guiadas por dados.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: Ecossistemas Nacionais - O Modelo de Singapura -->
+        <section id="singapura" class="scroll-mt-20">
+            <div class="border-l-4 border-teal-600 pl-4 mb-8">
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">4. Ecossistemas Nacionais: O Modelo de Singapura</h2>
+                <p class="text-slate-600 mt-1">A integração de incentivos estatais, crédito empresarial e financiamento público-privado via <i>SkillsFuture</i>.</p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-md p-6 sm:p-8 border border-slate-200">
+                <p class="text-slate-700 leading-relaxed mb-6">
+                    Singapura estruturou o ecossistema de requalificação contínua mais avançado do mundo. Unindo subsídios governamentais diretos, créditos para empresas e compensação por horas dedicadas ao estudo, o país garante transições tecnológicas sem rupturas sociais.
+                </p>
+
+                <!-- Process Diagram Flow in HTML/CSS -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 my-6">
+                    <div class="bg-slate-900 text-white p-5 rounded-xl border-t-4 border-sky-400 relative">
+                        <div class="text-xs font-bold text-sky-400 uppercase tracking-widest mb-1">Passo 1</div>
+                        <h4 class="font-bold text-base mb-2">Crédito Subvencionado</h4>
+                        <p class="text-xs text-slate-300">Subsídio governamental direto abate até 90% dos custos de cursos credenciados de IA para PMEs.</p>
+                    </div>
+
+                    <div class="bg-slate-900 text-white p-5 rounded-xl border-t-4 border-teal-400 relative">
+                        <div class="text-xs font-bold text-teal-400 uppercase tracking-widest mb-1">Passo 2</div>
+                        <h4 class="font-bold text-base mb-2">Crédito Empresarial SFEC</h4>
+                        <p class="text-xs text-slate-300">Empresas recebem S$ 10.000 para cobrir até 100% dos custos remanescentes em reengenharia de cargos.</p>
+                    </div>
+
+                    <div class="bg-slate-900 text-white p-5 rounded-xl border-t-4 border-sky-400 relative">
+                        <div class="text-xs font-bold text-sky-400 uppercase tracking-widest mb-1">Passo 3</div>
+                        <h4 class="font-bold text-base mb-2">Reembolso de Folha</h4>
+                        <p class="text-xs text-slate-300"><i>Absentee Payroll</i> reembolsa até S$ 4.50/hora concedida para o colaborador estudar no expediente.</p>
+                    </div>
+
+                    <div class="bg-slate-900 text-white p-5 rounded-xl border-t-4 border-teal-400 relative">
+                        <div class="text-xs font-bold text-teal-400 uppercase tracking-widest mb-1">Passo 4</div>
+                        <h4 class="font-bold text-base mb-2">Certificação WSQ</h4>
+                        <p class="text-xs text-slate-300">Trabalhadores obtêm qualificação oficial pelo <i>Skills Framework</i>, elevando a competitividade nacional.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-center text-xs text-slate-600">
+                    💡 <strong>Universidades Corporativas Avançadas:</strong> Na Europa (ex: Siemens Learning Campus), o modelo evoluiu para projetos práticos de inovação (<i>problem-based learning</i>), transformando a UC em geradora direta de soluções e patentes.
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: Aprendizagem Imersiva com Realidade Virtual -->
+        <section id="vr" class="scroll-mt-20">
+            <div class="border-l-4 border-sky-600 pl-4 mb-8">
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">5. Treinamento Imersivo com VR: Performance e Viabilidade</h2>
+                <p class="text-slate-600 mt-1">Simulações de alta fidelidade, compressão de tempo e análise da curva de escala e paridade de custos.</p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-md p-6 sm:p-8 border border-slate-200">
+                <p class="text-slate-700 leading-relaxed mb-6">
+                    Com a maturidade das tecnologias imersivas, redes como o Walmart já realizaram mais de <strong>2,2 milhões de sessões em VR</strong>, comprimindo módulos de 8 horas para apenas 15 minutos. Além de acelerar o aprendizado em 4x, o VR reduz acidentes de trabalho industriais em até 43%.
+                </p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-8">
+                    <!-- Left Chart: VR Metrics -->
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-2 text-center">Ganhos Operacionais do VR vs. Tradicional</h3>
+                        <p class="text-xs text-slate-500 mb-4 text-center">Métricas de retenção, velocidade e redução de erros (Estudos PwC/Walmart).</p>
+                        <div class="chart-container">
+                            <canvas id="chartVRPerformance"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Right Chart: VR Cost Parity Curve -->
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-2 text-center">Curva de Paridade Financeira do VR</h3>
+                        <p class="text-xs text-slate-500 mb-4 text-center">Custo por aluno em função do volume de participantes.</p>
+                        <div class="chart-container">
+                            <canvas id="chartVRCostCurve"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                    <div class="p-4 bg-slate-100 rounded-lg border-l-4 border-red-500">
+                        <div class="font-bold text-slate-900 mb-1">&lt; 300 Alunos</div>
+                        <p class="text-slate-600">Investimento inicial em modelagem 3D torna o VR menos viável do que turmas presenciais.</p>
+                    </div>
+                    <div class="p-4 bg-slate-100 rounded-lg border-l-4 border-amber-500">
+                        <div class="font-bold text-slate-900 mb-1">Ponto de Paridade (375 Alunos)</div>
+                        <p class="text-slate-600">Diluição do custo fixo iguala os gastos com deslocamento, instrutores e salas de aula físicas.</p>
+                    </div>
+                    <div class="p-4 bg-slate-100 rounded-lg border-l-4 border-emerald-500">
+                        <div class="font-bold text-slate-900 mb-1">3.000+ Alunos (Escala)</div>
+                        <p class="text-slate-600">O VR torna-se <strong>52% mais barato</strong> que o ensino presencial tradicional, com viagens totalmente eliminadas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: Tabela Resumo das Tendências Globais -->
+        <section id="resumo" class="scroll-mt-20">
+            <div class="border-l-4 border-teal-600 pl-4 mb-8">
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">6. Matriz de Tendências de T&D (2026–2027)</h2>
+                <p class="text-slate-600 mt-1">Síntese executiva das principais estratégias, seus impactos operacionais e países de referência.</p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-slate-200">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-900 text-white text-xs uppercase tracking-wider">
+                                <th class="p-4">Tendência Estratégica</th>
+                                <th class="p-4">Mecanismo de Funcionamento</th>
+                                <th class="p-4">Escopo & Impacto Esperado</th>
+                                <th class="p-4 text-center">Realidade Operacional</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-xs sm:text-sm">
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="p-4 font-bold text-slate-900">Organização Baseada em Habilidades</td>
+                                <td class="p-4 text-slate-600">Abandono de cargos rígidos por frameworks de competências dinâmicas.</td>
+                                <td class="p-4 text-slate-600">Redução de até 50% no tempo até a proficiência e maior retenção.</td>
+                                <td class="p-4 text-center"><span class="bg-sky-100 text-sky-800 font-bold px-2.5 py-1 rounded-full text-xs">Estados Unidos</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="p-4 font-bold text-slate-900">IA na Criação & Testes Automatizados</td>
+                                <td class="p-4 text-slate-600">Uso massivo de IA para gerar módulos, resumos e simulados de forma rápida.</td>
+                                <td class="p-4 text-slate-600">Redução de 50% no tempo de criação; suporte a equipes enxutas.</td>
+                                <td class="p-4 text-center"><span class="bg-emerald-100 text-emerald-800 font-bold px-2.5 py-1 rounded-full text-xs">Brasil</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="p-4 font-bold text-slate-900">Democratização de Formação em IA</td>
+                                <td class="p-4 text-slate-600">Capacitação intensiva de não especialistas com foco em retorno financeiro direto.</td>
+                                <td class="p-4 text-slate-600">ROI comprovado de 10x em 5 anos através de automação interna.</td>
+                                <td class="p-4 text-center"><span class="bg-amber-100 text-amber-800 font-bold px-2.5 py-1 rounded-full text-xs">Alemanha</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="p-4 font-bold text-slate-900">Cofinanciamento Estatal de Upskilling</td>
+                                <td class="p-4 text-slate-600">Créditos públicos e reembolsos empresariais para treinamentos aprovados.</td>
+                                <td class="p-4 text-slate-600">Redução substancial da barreira financeira para PMEs e trabalhadores.</td>
+                                <td class="p-4 text-center"><span class="bg-purple-100 text-purple-800 font-bold px-2.5 py-1 rounded-full text-xs">Singapura</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="p-4 font-bold text-slate-900">Treinamento VR em Larga Escala</td>
+                                <td class="p-4 text-slate-600">Simulação 3D imersiva para segurança, operação e atendimento avançado.</td>
+                                <td class="p-4 text-slate-600">Compressão de tempo em até 96% e queda de 43% em acidentes.</td>
+                                <td class="p-4 text-center"><span class="bg-sky-100 text-sky-800 font-bold px-2.5 py-1 rounded-full text-xs">Estados Unidos</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="p-4 font-bold text-slate-900">Universidade Corporativa Estendida</td>
+                                <td class="p-4 text-slate-600">Aprendizagem baseada em problemas reais (<i>problem-based learning</i>).</td>
+                                <td class="p-4 text-slate-600">Geração direta de patentes, inovação e capacitação da cadeia de valor.</td>
+                                <td class="p-4 text-center"><span class="bg-amber-100 text-amber-800 font-bold px-2.5 py-1 rounded-full text-xs">Alemanha</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="p-4 font-bold text-slate-900">Diagnóstico Estratégico (LNET)</td>
+                                <td class="p-4 text-slate-600">Triangulação de dados operacionais e escuta ativa substituindo pedidos informais.</td>
+                                <td class="p-4 text-slate-600">Alinhamento preciso entre orçamentos educacionais e metas estratégicas.</td>
+                                <td class="p-4 text-center"><span class="bg-emerald-100 text-emerald-800 font-bold px-2.5 py-1 rounded-full text-xs">Brasil</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 7: Plano de Ação Estratégico para Líderes -->
+        <section id="acoes" class="scroll-mt-20">
+            <div class="bg-gradient-to-r from-slate-900 via-sky-950 to-slate-900 text-white rounded-2xl p-6 sm:p-8 shadow-xl">
+                <h2 class="text-2xl font-bold text-sky-300 mb-4">Plano de Ação Estratégico para Líderes de T&D</h2>
+                <p class="text-sm text-slate-300 mb-6 font-light">
+                    Para liderar a transformação em 2026–2027, as diretorias de Recursos Humanos devem focar em três pilares fundamentais:
+                </p>
+
+                <!-- LNET Triangulation Model -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-6">
+                    <div class="bg-slate-800/90 border border-slate-700 p-5 rounded-xl">
+                        <div class="text-teal-400 font-bold text-base mb-2">1. LNET Estratégico</div>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Substituir levantamentos informais por triangulação de dados: cruze OKRs não atingidos e indicadores de desempenho com a escuta das equipes da ponta.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-800/90 border border-slate-700 p-5 rounded-xl">
+                        <div class="text-sky-400 font-bold text-base mb-2">2. Métricas de Impacto Ex-Ante</div>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Defina os KPIs de negócio (redução de erro, ganho de velocidade ou vendas) <i>antes</i> de lançar qualquer programa, superando o gargalo de medir apenas a reação.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-800/90 border border-slate-700 p-5 rounded-xl">
+                        <div class="text-teal-400 font-bold text-base mb-2">3. Curadoria de IA & VR</div>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Adote IA para automação de conteúdo e simulações imersivas onde o custo do erro operacional ou risco físico justifique o investimento.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="text-center pt-4 border-t border-slate-800 text-xs text-slate-400">
+                    Relatório consolidado com base em dados da ABTD, PwC, WEF, LinkedIn Learning e cases globais de T&D (2026–2027).
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-darkSlate text-slate-400 text-xs py-8 text-center border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>Relatório de Tendências de Treinamento e Desenvolvimento (2026–2027) • Desenvolvido para Alta Gestão de T&D</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Chart Configurations -->
+    <script>
+        // Shared configuration for tooltips title multi-line handling
+        const commonTooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        // Utility: Wrap labels logic (>16 chars)
+        function wrapLabel(str, maxChars = 16) {
+            if (str.length <= maxChars) return str;
+            const words = str.split(' ');
+            const lines = [];
+            let currentLine = '';
+
+            words.forEach(word => {
+                if ((currentLine + ' ' + word).trim().length <= maxChars) {
+                    currentLine = (currentLine + ' ' + word).trim();
+                } else {
+                    if (currentLine) lines.push(currentLine);
+                    currentLine = word;
+                }
+            });
+            if (currentLine) lines.push(currentLine);
+            return lines;
+        }
+
+        // 1. Chart: Talent Velocity Donut
+        const ctxVelocity = document.getElementById('chartTalentVelocity').getContext('2d');
+        new Chart(ctxVelocity, {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    wrapLabel('Líderes em Talent Velocity'),
+                    wrapLabel('Em Média / Hiato de Capacidade')
+                ],
+                datasets: [{
+                    data: [14, 86],
+                    backgroundColor: ['#0d9488', '#cbd5e1'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: commonTooltipConfig
+                }
+            }
+        });
+
+        // 2. Chart: Skills Impact (Bar)
+        const ctxSkills = document.getElementById('chartSkillsImpact').getContext('2d');
+        new Chart(ctxSkills, {
+            type: 'bar',
+            data: {
+                labels: [
+                    wrapLabel('Redução Tempo Proficiência'),
+                    wrapLabel('Aumento Engajamento Equipes'),
+                    wrapLabel('Retenção com Mobilidade')
+                ],
+                datasets: [{
+                    label: 'Ganho % / Anos Extensão',
+                    data: [40, 23, 86], // 86% extension from 2.9 to 5.4 yrs
+                    backgroundColor: ['#0284c7', '#0d9488', '#3b82f6']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    legend: { display: false },
+                    tooltip: commonTooltipConfig
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            callback: function(value) { return value + '%'; }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 3. Chart: AI Gains (Grouped Bar)
+        const ctxAIGains = document.getElementById('chartAIGains').getContext('2d');
+        new Chart(ctxAIGains, {
+            type: 'bar',
+            data: {
+                labels: [
+                    wrapLabel('Tempo Criação Conteúdo'),
+                    wrapLabel('Retenção Conhecimento'),
+                    wrapLabel('Taxa de Conclusão Trilhas')
+                ],
+                datasets: [
+                    {
+                        label: 'Tradicional (Base)',
+                        data: [100, 100, 100],
+                        backgroundColor: '#cbd5e1'
+                    },
+                    {
+                        label: 'Com IA Integrada',
+                        data: [50, 135, 130], // 50% time cut, +35% retention, +30% completion
+                        backgroundColor: '#0284c7'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: commonTooltipConfig
+                },
+                scales: {
+                    y: {
+                        ticks: {
+                            callback: function(value) { return value + '%'; }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 4. Chart: Brazil Evaluation Gap
+        const ctxBrazilEval = document.getElementById('chartBrazilEvaluation').getContext('2d');
+        new Chart(ctxBrazilEval, {
+            type: 'bar',
+            data: {
+                labels: [
+                    wrapLabel('Programas de Onboarding'),
+                    wrapLabel('Universidade Corporativa'),
+                    wrapLabel('Avaliação Aplicabilidade'),
+                    wrapLabel('Impacto no Negócio'),
+                    wrapLabel('Mensuração ROI Financeiro')
+                ],
+                datasets: [{
+                    label: '% das Empresas Brasileiras',
+                    data: [95, 61, 11, 3, 1],
+                    backgroundColor: ['#0284c7', '#0284c7', '#f59e0b', '#ef4444', '#dc2626']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: commonTooltipConfig
+                },
+                scales: {
+                    y: {
+                        max: 100,
+                        ticks: {
+                            callback: function(value) { return value + '%'; }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 5. Chart: VR Performance
+        const ctxVRPerf = document.getElementById('chartVRPerformance').getContext('2d');
+        new Chart(ctxVRPerf, {
+            type: 'bar',
+            data: {
+                labels: [
+                    wrapLabel('Velocidade Capacitação'),
+                    wrapLabel('Confiança Prática'),
+                    wrapLabel('Retenção Longo Prazo'),
+                    wrapLabel('Redução Acidentes Trabalho')
+                ],
+                datasets: [
+                    {
+                        label: 'Ensino Tradicional / E-Learning',
+                        data: [25, 30, 20, 0],
+                        backgroundColor: '#94a3b8'
+                    },
+                    {
+                        label: 'Treinamento VR Imersivo',
+                        data: [100, 82, 78, 43], // 4x speed (100 vs 25), 275% confidence boost, 78% retention, 43% accident drop
+                        backgroundColor: '#0d9488'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: commonTooltipConfig
+                },
+                scales: {
+                    y: {
+                        ticks: {
+                            callback: function(value) { return value + '%'; }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 6. Chart: VR Cost Parity Curve (Line Chart)
+        const ctxVRCost = document.getElementById('chartVRCostCurve').getContext('2d');
+        new Chart(ctxVRCost, {
+            type: 'line',
+            data: {
+                labels: ['100 Alunos', '375 Alunos', '1.000 Alunos', '3.000 Alunos'],
+                datasets: [
+                    {
+                        label: 'Custo por Aluno - Presencial (R$)',
+                        data: [1200, 1200, 1200, 1200],
+                        borderColor: '#94a3b8',
+                        borderDash: [5, 5],
+                        fill: false
+                    },
+                    {
+                        label: 'Custo por Aluno - VR Imersivo (R$)',
+                        data: [2800, 1200, 800, 576], // Break-even at 375, 52% cheaper at 3000
+                        borderColor: '#0284c7',
+                        backgroundColor: 'rgba(2, 132, 199, 0.1)',
+                        fill: true,
+                        tension: 0.3
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: commonTooltipConfig
+                },
+                scales: {
+                    y: {
+                        ticks: {
+                            callback: function(value) { return 'R$ ' + value; }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
